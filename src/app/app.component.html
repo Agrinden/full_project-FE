@@ -1,8 +1,1 @@
-<div class="container">
-  <button class="btn" (click)="showUsers()">Get users</button>
-  <ul>
-    <li *ngFor="let user of users$ | async">
-      <h4>Фамилия: {{ user.surName }}</h4>
-    </li>
-  </ul>
-</div>
+<router-outlet></router-outlet>
