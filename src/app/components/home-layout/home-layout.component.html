@@ -1,12 +1,6 @@
-<div class="container">
-  <div class="input-container">
-    <input type="text" placeholder="Surname" [(ngModel)]="surName" class="input-field">
-    <button class="btn" (click)="saveUser()">Save</button>
+<div class="content">
+  <app-header></app-header>
+  <div class="main-container">
+    <router-outlet></router-outlet>
   </div>
-  <ul class="users-list">
-    <li>
-      <app-user-card *ngFor="let user of users$ | async" [user]="user" (deleteEvent)="deleteUser($event)"
-        (updateEvent)="updateUser($event)"></app-user-card>
-    </li>
-  </ul>
 </div>

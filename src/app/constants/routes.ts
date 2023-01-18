@@ -1,4 +1,7 @@
 export enum RouteUrls {
     login = 'login',
-    main = 'main'
+    main = 'main',
+    registration = 'registration',
+    contacts = 'contacts',
+    about = 'about'
 }

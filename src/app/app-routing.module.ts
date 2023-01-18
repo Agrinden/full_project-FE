@@ -5,15 +5,27 @@ import { AuthGuard } from './guards/auth.guards';
 
 const routes: Routes = [
     {
-        path: RouteUrls.main,
+        path: '',
         loadComponent: () => import('./components/home-layout/home-layout.component').then(m => m.HomeLayoutComponent),
         canActivate: [AuthGuard],
         children: [
-            // {
-            //     path: RouteUrls.main,
-            //     loadComponent: () =>
-            //         import('./components/home-layout/home-layout.component').then(m => m.HomeLayoutComponent)
-            // }
+            {
+                path: '',
+                redirectTo: RouteUrls.main,
+                pathMatch: 'full'
+            },
+            {
+                path: RouteUrls.main,
+                loadComponent: () => import('./components/main-page/main-page.component').then(m => m.MainPageComponent)
+            },
+            {
+                path: RouteUrls.about,
+                loadComponent: () => import('./components/about/about.component').then(m => m.AboutComponent)
+            },
+            {
+                path: RouteUrls.contacts,
+                loadComponent: () => import('./components/contacts/contacts.component').then(m => m.ContactsComponent)
+            }
         ]
     },
     {

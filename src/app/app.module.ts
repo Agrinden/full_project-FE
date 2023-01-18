@@ -15,6 +15,9 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { appReducers } from './store/data.state';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { AboutComponent } from './components/about/about.component';
+import { ContactsComponent } from './components/contacts/contacts.component';
+import { HeaderComponent } from './components/header/header.component';
 
 @NgModule({
     declarations: [AppComponent, SnackBarComponent],

@@ -21,9 +21,9 @@ export class UserService {
         return this.http.get<UsersDTO[]>(this.BASE_URL.concat('/users'));
     }
 
-    public addUser(userData: string): Observable<UsersDTO[]> {
+    public addUser(userData: string): Observable<UsersDTO> {
         const body = { surName: userData };
-        return this.http.post<UsersDTO[]>(`${environment.baseUrl}/users`, body);
+        return this.http.post<UsersDTO>(`${environment.baseUrl}/users`, body);
     }
 
     public editUser(userData: UsersDTO): Observable<UsersDTO[]> {

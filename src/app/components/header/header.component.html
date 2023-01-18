@@ -1,0 +1,13 @@
+<header class="header">
+  <div class="header-container">
+    <img src="../../../assets/main-logo.svg" alt="" id="logo">
+    <nav mat-tab-nav-bar [tabPanel]="tabPanel">
+      <a mat-tab-link routerLinkActive="active-link" *ngFor="let link of links" (click)="activeLink = link"
+        [active]="activeLink === link" routerLink="{{ link.route }}">
+        <mat-icon aria-hidden="false" class="header-icons">{{ link.icon }}</mat-icon>
+        <span class="header-name">{{ link.name }}</span>
+      </a>
+    </nav>
+    <mat-tab-nav-panel #tabPanel></mat-tab-nav-panel>
+  </div>
+</header>
