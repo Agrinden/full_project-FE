@@ -1,0 +1,9 @@
+<div class="dialog-container">
+    <div class="dialog-content">
+        {{ dialogContent }}
+    </div>
+    <mat-dialog-actions class="dialog-buttons">
+        <button class="confirm" mat-button (click)="handleClose(dialogEnum.confirm)">Yes</button>
+        <button class="refuse" mat-button (click)="handleClose(dialogEnum.refuse)">No</button>
+    </mat-dialog-actions>
+</div>

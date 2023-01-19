@@ -1,0 +1,30 @@
+<form class="login-form" [formGroup]="loginForm">
+  <div class="form-title">
+    <span>Login</span>
+  </div>
+  <div class="form-container">
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>UserName</mat-label>
+      <input type="text" matInput formControlName="name" placeholder="Dimas" autocomplete="on">
+    </mat-form-field>
+    <div class="errors" *ngIf="loginForm.invalid && loginForm.controls['name'].touched">
+      <span *ngIf="loginForm.controls['name'].errors">You must input User Name!
+      </span>
+    </div>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Password</mat-label>
+      <input [type]="isPassVisible ? 'text' : 'password'" matInput formControlName="password" placeholder="Password"
+        autocomplete="on">
+      <mat-icon class="eye-icon" (click)="togglePassVisibility()">{{ isPassVisible ? 'visibility_off' : 'visibility'}}
+      </mat-icon>
+    </mat-form-field>
+    <div class="errors" *ngIf="loginForm.invalid && loginForm.controls['password'].touched">
+      <span *ngIf="loginForm.controls['password'].errors">You must input correct password!
+      </span>
+    </div>
+    <mat-dialog-actions class="down-button">
+      <button class="login-btn" cdkFocusInitial mat-button [disabled]="loginForm.invalid"
+        (click)="login()">Login</button>
+    </mat-dialog-actions>
+  </div>
+</form>
