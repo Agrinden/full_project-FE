@@ -1,14 +1,6 @@
-import { filter } from 'rxjs';
-import {
-    addUser,
-    deleteUser,
-    updateUser,
-    addUserSuccess,
-    updateUserSuccess,
-    deleteUserSuccess
-} from './../actions/user.actions';
+import { addUserSuccess, updateUserSuccess, deleteUserSuccess } from './../actions/user.actions';
 import { Action, createReducer, on } from '@ngrx/store';
-import { loadUsers, loadUsersSuccess } from '../actions/user.actions';
+import { loadUsersSuccess } from '../actions/user.actions';
 import { UsersDTO } from '../../interfaces/usersDTO.interface';
 
 export interface UsersState {
@@ -27,45 +19,56 @@ const _usersReducer = createReducer(
             users: action.users
         };
     }),
-    // on(loadUsers, (state, action) => {
-    //     return {
-    //         ...state,
-    //         action
-    //     };
-    // }),
     on(addUserSuccess, (state, action) => {
         return {
             ...state,
             users: [...state.users, action.user]
         };
     }),
-    // on(addUser, (state, action) => {
-    //     return {
-    //         ...state,
-    //         action
-    //     };
-    // }),
     on(updateUserSuccess, (state, action) => {
         console.log('state is ', state);
         console.log('action is ', action);
+        console.log(state.users);
+        console.log(action.user._id);
+
+        const newUsers = state.users.reduce((acc, item) => {
+            if (item._id === action.user._id) {
+                return [...acc, action.user];
+            }
+            return [...acc, item];
+        }, []);
 
         return {
             ...state,
-            users: []
+            users: newUsers
         };
     }),
-    // on(updateUser, (state, action) => {
-    //     return {
-    //         ...state,
-    //         action
-    //     };
-    // }),
     on(deleteUserSuccess, (state, action) => {
         return {
             ...state,
             users: state.users.filter(user => user._id !== action.id)
         };
     })
+    // on(loadUsers, (state, action) => {
+    //     return {
+    //         ...state,
+    //         action
+    //     };
+    // }),
+
+    // on(addUser, (state, action) => {
+    //     return {
+    //         ...state,
+    //         action
+    //     };
+    // }),
+
+    // on(updateUser, (state, action) => {    //     return {
+    //         ...state,
+    //         action
+    //     };
+    // }),
+
     // on(deleteUser, (state, action) => {
     //     return {
     //         ...state,
