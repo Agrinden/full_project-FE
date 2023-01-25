@@ -14,9 +14,9 @@ export enum UserActionTypes {
 
 export const loadUsers = createAction(UserActionTypes.LOAD_USERS);
 export const loadUsersSuccess = createAction(UserActionTypes.LOAD_USERS_SUCCESS, props<{ users: UsersDTO[] }>());
-export const addUser = createAction(UserActionTypes.ADD_USER);
+export const addUser = createAction(UserActionTypes.ADD_USER, props<{ surName: string }>());
 export const addUserSuccess = createAction(UserActionTypes.ADD_USER_SUCCESS, props<{ user: UsersDTO }>());
 export const deleteUser = createAction(UserActionTypes.DELETE_USER, props<{ id: string }>());
 export const deleteUserSuccess = createAction(UserActionTypes.DELETE_USER_SUCCESS, props<{ id: string }>());
-export const updateUser = createAction(UserActionTypes.UPDATE_USER);
+export const updateUser = createAction(UserActionTypes.UPDATE_USER, props<{ user: UsersDTO }>());
 export const updateUserSuccess = createAction(UserActionTypes.UPDATE_USER_SUCCESS, props<{ user: UsersDTO }>());

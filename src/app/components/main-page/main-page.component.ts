@@ -3,13 +3,17 @@ import {
     loadUsersSuccess,
     updateUserSuccess,
     addUserSuccess,
-    deleteUserSuccess
+    deleteUserSuccess,
+    loadUsers,
+    updateUser,
+    addUser,
+    deleteUser
 } from './../../store/actions/user.actions';
 import { AppState } from './../../store/data.state';
 import { UserCardComponent } from './../user-card/user-card.component';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 
@@ -30,7 +34,7 @@ import { ofType } from '@ngrx/effects';
     standalone: true,
     imports: [CommonModule, FormsModule, UserCardComponent]
 })
-export class MainPageComponent implements OnInit {
+export class MainPageComponent implements OnInit, OnDestroy {
     public users$: Observable<UsersDTO[]>;
     public surName: string;
     public errorMessage = '';
@@ -58,48 +62,62 @@ export class MainPageComponent implements OnInit {
     }
 
     public saveUser(): void {
-        this.userServise.addUser(this.surName).subscribe({
-            next: user => {
-                this.surName = '';
-                this.store.dispatch(addUserSuccess({ user: user as UsersDTO }));
-            },
-            error: err => {
-                this.errorMessage = err.error.message;
-                console.log(this.errorMessage);
-                this.openSnackBar(this.errorMessage);
-            }
-        });
+        /*without ngrx-effects*/
+        // this.userServise.addUser(this.surName).subscribe({
+        //     next: user => {
+        //         this.surName = '';
+        //         this.store.dispatch(addUserSuccess({ user: user as UsersDTO }));
+        //     },
+        //     error: err => {
+        //         this.errorMessage = err.error.message;
+        //         console.log(this.errorMessage);
+        //         this.openSnackBar(this.errorMessage);
+        //     }
+        // });
+        this.store.dispatch(addUser({ surName: this.surName }));
     }
 
     public showUsers(): void {
+        /*without ngrx*/
         // this.users$ = this.userServise.getUsers();
         this.users$ = this.store.select(getUsers());
-        this.userServise.getUsers().subscribe(result => {
-            this.store.dispatch(loadUsersSuccess({ users: result }));
-        });
+        /*without ngrx-effects*/
+        // this.userServise.getUsers().subscribe(result => {
+        //     this.store.dispatch(loadUsersSuccess({ users: result }));
+        // });
+        this.store.dispatch(loadUsers());
     }
 
     public updateUser(user: UsersDTO): void {
+        /*without ngrx*/
         // this.userServise.editUser(user).subscribe(() => {
         //     this.showUsers();
         // });
-        this.userServise.editUser(user).subscribe(() => {
-            this.store.dispatch(updateUserSuccess({ user }));
-            // this.showUsers();
-        });
+        /*without ngrx-effects*/
+        // this.userServise.editUser(user).subscribe(() => {
+        //     this.store.dispatch(updateUserSuccess({ user }));
+        // });
+        this.store.dispatch(updateUser({ user }));
     }
 
     public deleteUser(userId: string): void {
-        this.userServise
-            .deleteWarning()
-            .pipe(
-                filter(value => value === ConfirmationDialogChoice.confirm),
-                switchMap(() => this.userServise.deleteUser(userId)),
-                takeUntil(this.destroy$)
-            )
-            .subscribe(
-                () => this.store.dispatch(deleteUserSuccess({ id: userId }))
-                // () => this.showUsers()
-            );
+        // this.userServise
+        //     .deleteWarning()
+        //     .pipe(
+        //         filter(value => value === ConfirmationDialogChoice.confirm),
+        //         switchMap(() => this.userServise.deleteUser(userId)),
+        //         takeUntil(this.destroy$)
+        //     )
+        //     .subscribe(
+        //         () => this.store.dispatch(deleteUserSuccess({ id: userId }))
+        //     );
+        console.log('user ID', userId);
+
+        this.store.dispatch(deleteUser({ id: userId }));
+    }
+
+    ngOnDestroy(): void {
+        this.destroy$.next();
+        this.destroy$.unsubscribe();
     }
 }

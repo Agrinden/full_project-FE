@@ -18,7 +18,7 @@
 <ng-template #templateEdit>
   <div class="user">
     <h4 class="surname">Фамилия: </h4>
-    <input type="text" [(ngModel)]="user.surName" class="edit-surname" autofocus>
+    <input type="text" [(ngModel)]="surName" class="edit-surname" autofocus>
     <div>
       <button class="btn edit-save" (click)="updateData()">Update</button>
       <span class="material-symbols-outlined" (click)="toggleEdit()" title="edit">
