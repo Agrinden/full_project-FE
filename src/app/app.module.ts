@@ -1,3 +1,4 @@
+import { UserEffects } from './store/effects/user.effects';
 import { UserCardComponent } from './components/user-card/user-card.component';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -32,7 +33,7 @@ import { HeaderComponent } from './components/header/header.component';
         UserCardComponent,
         MatSnackBarModule,
         StoreModule.forRoot(appReducers),
-        EffectsModule.forRoot([]),
+        EffectsModule.forRoot([UserEffects]),
         StoreDevtoolsModule.instrument()
     ],
     providers: [],
