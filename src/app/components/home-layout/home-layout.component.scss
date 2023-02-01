@@ -1,0 +1,21 @@
+* {
+    box-sizing: border-box;
+    margin: 0 auto;
+    max-width: 100%;
+    padding: 0;
+    background-color: rgb(241, 246, 246);
+}
+
+.content {
+    width: 100%;
+    .main-container {
+        width: 1054px;
+        box-sizing: border-box;
+        margin: 0 auto;
+        height: 100vh;
+    }
+}
+
+::ng-deep .main-container {
+    background-color: rgb(241, 246, 246);
+}

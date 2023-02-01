@@ -1,0 +1,32 @@
+<ng-container *ngIf="isEdit then templateEdit; else templateView"></ng-container>
+
+<ng-template #templateView>
+  <div class="user">
+    <h4 class="surname">Фамилия: </h4>
+    <span class="edit-surname">{{ user.surName }}</span>
+    <div>
+      <span class="material-symbols-outlined" (click)="toggleEdit()" title="edit">
+        edit
+      </span>
+      <span class="material-symbols-outlined" (click)="deleteData()" title="remove">
+        delete
+      </span>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #templateEdit>
+  <div class="user">
+    <h4 class="surname">Фамилия: </h4>
+    <input type="text" [(ngModel)]="surName" class="edit-surname" autofocus>
+    <div>
+      <button class="btn edit-save" (click)="updateData()">Update</button>
+      <span class="material-symbols-outlined" (click)="toggleEdit()" title="edit">
+        Close
+      </span>
+      <span class="material-symbols-outlined" (click)="deleteData()" title="remove">
+        delete
+      </span>
+    </div>
+  </div>
+</ng-template>

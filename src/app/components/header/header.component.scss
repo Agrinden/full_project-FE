@@ -1,0 +1,41 @@
+* {
+    box-sizing: border-box;
+}
+
+:host ::ng-deep {
+    .mat-tab-link {
+        font-size: 20px;
+    }
+    .mat-tab-header {
+        border: none;
+    }
+    .mat-tab-nav-bar.mat-primary .mat-ink-bar {
+        background-color: rgb(17, 119, 114);
+    }
+}
+
+.header {
+    width: 100%;
+    background-color: rgb(150, 213, 213);
+    display: flex;
+    justify-content: center;
+
+    .header-container {
+        width: 1054px;
+        height: 80px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        .nav-panel {
+            margin: 0 80px;
+        }
+        #logo {
+            width: 50px;
+            height: 50px;
+        }
+        #logout-icon {
+            font-size: xx-large;
+            cursor: pointer;
+        }
+    }
+}

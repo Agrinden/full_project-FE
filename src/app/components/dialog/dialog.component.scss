@@ -1,0 +1,13 @@
+.dialog-container {
+    width: 310px;
+    .dialog-content {
+        text-align: center;
+        font-weight: bold;
+        color: #f14d4d;
+        font-size: 15px;
+    }
+    .dialog-buttons {
+        display: flex;
+        justify-content: center;
+    }
+}

@@ -1,0 +1,15 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    padding-top: 50px;
+}
+
+.container {
+    background-color: #a272d1;
+    height: 100vh;
+    app-login-form {
+        display: flex;
+        justify-content: center;
+    }
+}
