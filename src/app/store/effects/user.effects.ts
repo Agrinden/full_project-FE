@@ -1,12 +1,10 @@
-import { ConfirmationDialogChoice } from './../../enums/dialog-enums';
-import { UsersDTO } from './../../interfaces/usersDTO.interface';
-import { UserService } from './../../services/user/user.service';
-import { map, switchMap, filter } from 'rxjs';
-import { UserActionTypes } from './../actions/user.actions';
-import { Action } from '@ngrx/store';
 import { Injectable } from '@angular/core';
+
+import { map, switchMap } from 'rxjs';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { loadUsers } from '../actions/user.actions';
+
+import { UserService } from './../../services/user/user.service';
+import { UserActionTypes } from './../actions/user.actions';
 
 @Injectable()
 export class UserEffects {
@@ -32,23 +30,16 @@ export class UserEffects {
         )
     );
 
-    deleteUser$ = createEffect(() => {
-        console.log('delete user');
-
-        return this.actions$.pipe(
+    deleteUser$ = createEffect(() =>
+        this.actions$.pipe(
             ofType(UserActionTypes.DELETE_USER),
-            // @ts-ignore
-            switchMap((data: any) => {
-                console.log('swict', data);
-                this.userService.deleteUser(data.id);
-            }),
-            map(({ id }) => ({
-                // this.userService.deleteWarning().pipe(filter(val => val === ConfirmationDialogChoice.confirm))
+            switchMap(({ id }) => this.userService.deleteUser(id)),
+            map(({ _id }) => ({
                 type: UserActionTypes.DELETE_USER_SUCCESS,
-                id
+                id: _id
             }))
-        );
-    });
+        )
+    );
 
     updateUser$ = createEffect(() =>
         this.actions$.pipe(

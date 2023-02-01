@@ -1,5 +1,6 @@
-import { UsersDTO } from './../../interfaces/usersDTO.interface';
 import { createAction, props } from '@ngrx/store';
+
+import { UsersDTO } from './../../interfaces/usersDTO.interface';
 
 export enum UserActionTypes {
     LOAD_USERS = '[User State] Load Users',

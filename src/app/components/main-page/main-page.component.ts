@@ -1,30 +1,20 @@
-import { getUsers } from './../../store/selectors/user.selectors';
-import {
-    loadUsersSuccess,
-    updateUserSuccess,
-    addUserSuccess,
-    deleteUserSuccess,
-    loadUsers,
-    updateUser,
-    addUser,
-    deleteUser
-} from './../../store/actions/user.actions';
-import { AppState } from './../../store/data.state';
-import { UserCardComponent } from './../user-card/user-card.component';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 
-import { catchError, EMPTY, filter, Observable, of, Subject, switchMap, takeUntil } from 'rxjs';
+import { filter, Observable, Subject, takeUntil } from 'rxjs';
+import { Store } from '@ngrx/store';
 
 import { ConfirmationDialogChoice } from 'src/app/enums/dialog-enums';
 import { UsersDTO } from 'src/app/interfaces/usersDTO.interface';
 import { UserService } from 'src/app/services/user/user.service';
 import { SnackBarComponent } from '../snack-bar/snack-bar.component';
-import { Store } from '@ngrx/store';
-import { ofType } from '@ngrx/effects';
+import { getUsers } from './../../store/selectors/user.selectors';
+import { loadUsers, updateUser, addUser, deleteUser } from './../../store/actions/user.actions';
+import { AppState } from './../../store/data.state';
+import { UserCardComponent } from './../user-card/user-card.component';
 
 @Component({
     selector: 'app-main-page',
@@ -75,6 +65,7 @@ export class MainPageComponent implements OnInit, OnDestroy {
         //     }
         // });
         this.store.dispatch(addUser({ surName: this.surName }));
+        this.surName = '';
     }
 
     public showUsers(): void {
@@ -101,19 +92,15 @@ export class MainPageComponent implements OnInit, OnDestroy {
     }
 
     public deleteUser(userId: string): void {
-        // this.userServise
-        //     .deleteWarning()
-        //     .pipe(
-        //         filter(value => value === ConfirmationDialogChoice.confirm),
-        //         switchMap(() => this.userServise.deleteUser(userId)),
-        //         takeUntil(this.destroy$)
-        //     )
-        //     .subscribe(
-        //         () => this.store.dispatch(deleteUserSuccess({ id: userId }))
-        //     );
-        console.log('user ID', userId);
-
-        this.store.dispatch(deleteUser({ id: userId }));
+        this.userServise
+            .showConfirmationDialog('Are you sure that you want to delete user?')
+            .pipe(
+                filter(value => value === ConfirmationDialogChoice.confirm),
+                /*without ngrx*/
+                // switchMap(() => this.userServise.deleteUser(userId)),
+                takeUntil(this.destroy$)
+            )
+            .subscribe(() => this.store.dispatch(deleteUser({ id: userId })));
     }
 
     ngOnDestroy(): void {

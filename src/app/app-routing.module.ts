@@ -1,7 +1,8 @@
-import { RouteUrls } from './constants/routes';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+
 import { AuthGuard } from './guards/auth.guards';
+import { RouteUrls } from './constants/routes';
 
 const routes: Routes = [
     {
@@ -33,9 +34,8 @@ const routes: Routes = [
         loadComponent: () => import('./components/login/login.component').then(m => m.LoginComponent)
     },
     {
-        path: '',
-        redirectTo: RouteUrls.login,
-        pathMatch: 'full'
+        path: '**',
+        redirectTo: '/error'
     }
 ];
 

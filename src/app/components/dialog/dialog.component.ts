@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 
-import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 
 import { ConfirmationDialogChoice } from '../../enums/dialog-enums';
@@ -15,13 +15,13 @@ import { ConfirmationDialogChoice } from '../../enums/dialog-enums';
     imports: [CommonModule, MatDialogModule, MatButtonModule]
 })
 export class DialogComponent implements OnInit {
-    public dialogContent = 'Do you realy want to delete this user?';
     public dialogEnum = ConfirmationDialogChoice;
+    public dialogContent = '';
 
-    constructor(private dialogRef: MatDialogRef<DialogComponent>) {}
+    constructor(private dialogRef: MatDialogRef<DialogComponent>, @Inject(MAT_DIALOG_DATA) private data: string) {}
 
     ngOnInit(): void {
-        this.dialogContent;
+        this.dialogContent = this.data;
     }
 
     public handleClose(res: ConfirmationDialogChoice): void {

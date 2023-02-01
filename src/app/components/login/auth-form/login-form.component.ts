@@ -47,7 +47,7 @@ export class LoginFormComponent implements OnInit {
         if (this.loginForm && this.loginForm.valid) {
             const authData = this.loginForm.value as AuthData;
             this.authDataService.login(authData).subscribe(res => {
-                // localStorage.setItem('userToken', res.jwtToken);
+                localStorage.setItem('userToken', res.jwtToken);
                 this.router.navigate([RouteUrls.main]);
             });
         }
