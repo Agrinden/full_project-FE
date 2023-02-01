@@ -1,13 +1,6 @@
-import {
-    addUserSuccess,
-    updateUserSuccess,
-    deleteUserSuccess,
-    loadUsers,
-    addUser,
-    deleteUser
-} from './../actions/user.actions';
 import { Action, createReducer, on } from '@ngrx/store';
-import { loadUsersSuccess } from '../actions/user.actions';
+
+import { addUserSuccess, updateUserSuccess, deleteUserSuccess, loadUsersSuccess } from './../actions/user.actions';
 import { UsersDTO } from '../../interfaces/usersDTO.interface';
 
 export interface UsersState {
@@ -39,8 +32,6 @@ const _usersReducer = createReducer(
             }
             return [...acc, item];
         }, [] as UsersDTO[]);
-
-        console.log(newUsers);
 
         return {
             ...state,

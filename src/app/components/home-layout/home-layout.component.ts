@@ -1,10 +1,10 @@
-import { HeaderComponent } from './../header/header.component';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 
 import { UserCardComponent } from './../user-card/user-card.component';
+import { HeaderComponent } from './../header/header.component';
 
 @Component({
     selector: 'app-home-layout',
