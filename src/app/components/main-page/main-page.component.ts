@@ -29,26 +29,12 @@ export class MainPageComponent implements OnInit, OnDestroy {
     public surName: string;
     public errorMessage = '';
 
-    /*snackBar variables*/
-    public durationInSeconds = 5000;
-    public horizontalPosition: MatSnackBarHorizontalPosition = 'center';
-    public verticalPosition: MatSnackBarVerticalPosition = 'top';
-
     private destroy$ = new Subject<void>();
 
     constructor(private userServise: UserService, private snackBar: MatSnackBar, private store: Store<AppState>) {}
 
     ngOnInit(): void {
         this.showUsers();
-    }
-
-    public openSnackBar(message: string): void {
-        this.snackBar.openFromComponent(SnackBarComponent, {
-            duration: this.durationInSeconds,
-            horizontalPosition: this.horizontalPosition,
-            verticalPosition: this.verticalPosition,
-            data: message
-        });
     }
 
     public saveUser(): void {
