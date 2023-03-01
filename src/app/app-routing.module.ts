@@ -34,6 +34,11 @@ const routes: Routes = [
         loadComponent: () => import('./components/login/login.component').then(m => m.LoginComponent)
     },
     {
+        path: RouteUrls.registration,
+        loadComponent: () =>
+            import('./components/registration/registration.component').then(m => m.RegistrationComponent)
+    },
+    {
         path: '**',
         redirectTo: '/error'
     }

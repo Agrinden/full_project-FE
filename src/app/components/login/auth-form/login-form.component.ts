@@ -53,6 +53,10 @@ export class LoginFormComponent implements OnInit {
         }
     }
 
+    public registration(): void {
+        this.router.navigate([RouteUrls.registration]);
+    }
+
     private getLoginForm(): FormGroup {
         const form = this.formBuilder.group({
             name: ['', Validators.required],

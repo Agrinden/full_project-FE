@@ -2,7 +2,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 
-import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { filter, Observable, Subject, takeUntil } from 'rxjs';
 import { Store } from '@ngrx/store';
@@ -31,7 +31,7 @@ export class MainPageComponent implements OnInit, OnDestroy {
 
     private destroy$ = new Subject<void>();
 
-    constructor(private userServise: UserService, private snackBar: MatSnackBar, private store: Store<AppState>) {}
+    constructor(private userServise: UserService, private store: Store<AppState>) {}
 
     ngOnInit(): void {
         this.showUsers();

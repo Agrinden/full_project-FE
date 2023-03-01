@@ -1,0 +1,51 @@
+<form class="registration-form" [formGroup]="registrForm">
+  <div class="form-title">
+    <span>Registration</span>
+  </div>
+  <div class="form-container">
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>UserName</mat-label>
+      <input type="text" matInput formControlName="name">
+    </mat-form-field>
+    <div class="errors" *ngIf="registrForm.controls['name'].touched && registrForm.controls['name'].errors">
+      <span>Valid
+        UserName must contain only latin letters and
+        numbers (0-9)</span>
+    </div>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>E-mail</mat-label>
+      <input type="text" matInput formControlName="email">
+    </mat-form-field>
+    <div class="errors" *ngIf="registrForm.invalid && registrForm.controls['email'].touched">
+      <span *ngIf="registrForm.controls['email'].errors">Valid email must contain only lowercase latin letters (a-z),
+        numbers (0-9), '@'' and '.'</span>
+    </div>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Password</mat-label>
+      <input [type]="isPassVisible ? 'text' : 'password'" matInput formControlName="password" autocomplete="on">
+      <mat-icon class="eye-icon" (click)="togglePassVisibility()">{{ isPassVisible ? 'visibility_off' : 'visibility'
+        }}</mat-icon>
+    </mat-form-field>
+    <div class="errors" *ngIf="registrForm.controls['password'].touched && registrForm.controls['password'].errors">
+      <span>Valid Password must contain latin letters and number, at least 8
+        characters</span>
+    </div>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Confirm password</mat-label>
+      <input [type]="isPassVisible ? 'text' : 'password'" matInput formControlName="confirmPassword" autocomplete="on">
+      <mat-icon class="eye-icon" (click)="toggleConfirmPassVisibility()">{{ isConfirmPassVisible ? 'visibility_off' :
+        'visibility'
+        }}</mat-icon>
+    </mat-form-field>
+    <div class="errors" *ngIf="isPasswordsInvalid()">
+      <span *ngIf="registrForm.controls['confirmPassword'].errors">Password must be the same</span>
+    </div>
+    <div class="errors" *ngIf="isFormErrorInvalid()">
+      <span>Invalid UserName, Email or Password. Please provide the correct Registration credentials</span>
+    </div>
+    <mat-dialog-actions class="down-button">
+      <button class="registr-btn" cdkFocusInitial mat-button color="primary" [disabled]="registrForm.invalid"
+        (click)="registration()">Registration</button>
+    </mat-dialog-actions>
+  </div>
+</form>
