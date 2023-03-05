@@ -1,3 +1,4 @@
+import { RegistrDataDTO } from './../../interfaces/registrData.interface';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
@@ -23,6 +24,10 @@ export class AuthDataService {
         localStorage.clear();
         this.router.navigate([RouteUrls.login]);
         return this.http.post<string>(environment.LOGOUT_URL, body);
+    }
+
+    public registration(regData: RegistrDataDTO): Observable<Response> {
+        return this.http.post<Response>(environment.REGISTRATION_URL, regData);
     }
 
     isAuthenticated(): boolean {

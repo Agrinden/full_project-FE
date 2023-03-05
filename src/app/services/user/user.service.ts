@@ -5,7 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 
 import { DialogComponent } from '../../components/dialog/dialog.component';
-import { environment } from './../../../environments/environment.prod';
+import { environment } from './../../../environments/environment';
 import { UsersDTO } from 'src/app/interfaces/usersDTO.interface';
 
 @Injectable({
