@@ -55,7 +55,7 @@ export class RegistrationFormComponent implements OnInit {
         if (this.registrForm && this.registrForm.valid) {
             const { confirmPassword, ...regData } = this.registrForm.value as RegistrData;
             this.authDataService.registration(regData).subscribe(() => {
-                this.openSnackBar('Registration was successful, now you can Log In');
+                this.openSnackBar('Registration was successful, now you can Log In', true);
                 this.router.navigate([RouteUrls.login]);
             });
         }
@@ -77,12 +77,15 @@ export class RegistrationFormComponent implements OnInit {
         this.isConfirmPassVisible = !this.isConfirmPassVisible;
     }
 
-    public openSnackBar(message: string): void {
+    public openSnackBar(message: string, isNoError: boolean): void {
         this.snackBar.openFromComponent(SnackBarComponent, {
             duration: this.durationInSeconds,
             horizontalPosition: this.horizontalPosition,
             verticalPosition: this.verticalPosition,
-            data: message
+            data: {
+                titleMessage: message,
+                condition: isNoError
+            }
         });
     }
 

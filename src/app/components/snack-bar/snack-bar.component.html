@@ -1,6 +1,6 @@
-<div class="container">
+<div class="container" [class.container-2]="isSuccessCondition">
   <span class="example-pizza-party" matSnackBarLabel>
-    {{ data }}
+    {{ data.titleMessage }}
   </span>
   <span matSnackBarActions>
     <button mat-button class="material-symbols-outlined" matSnackBarAction
