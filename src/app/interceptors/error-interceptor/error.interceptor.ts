@@ -22,7 +22,7 @@ export class ErrorInterceptor implements HttpInterceptor {
                         duration: this.durationInSeconds,
                         horizontalPosition: this.horizontalPosition,
                         verticalPosition: this.verticalPosition,
-                        data: err.error.message
+                        data: { titleMessage: err.error.message }
                     })
                 );
             })
