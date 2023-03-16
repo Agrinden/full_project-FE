@@ -1,4 +1,3 @@
-import { ErrorInterceptor } from './interceptors/error-interceptor/error.interceptor';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -14,12 +13,15 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { AuthInterceptor } from './interceptors/auth-interceptor/auth.interceptor';
+import { LoaderInterceptor } from './interceptors/loader-interceptor/loader.interceptor';
+import { ErrorInterceptor } from './interceptors/error-interceptor/error.interceptor';
 import { UserEffects } from './store/effects/user.effects';
 import { UserCardComponent } from './components/user-card/user-card.component';
 import { SnackBarComponent } from './components/snack-bar/snack-bar.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { appReducers } from './store/data.state';
+import { LoadingComponent } from './components/loading/loading.component';
 
 import { JwtModule } from '@auth0/angular-jwt';
 
@@ -39,6 +41,7 @@ export function tokenGetter() {
         MatDialogModule,
         UserCardComponent,
         MatSnackBarModule,
+        LoadingComponent,
         StoreModule.forRoot(appReducers),
         EffectsModule.forRoot([UserEffects]),
         StoreDevtoolsModule.instrument(),
@@ -59,6 +62,11 @@ export function tokenGetter() {
         {
             provide: HTTP_INTERCEPTORS,
             useClass: ErrorInterceptor,
+            multi: true
+        },
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: LoaderInterceptor,
             multi: true
         }
     ],
