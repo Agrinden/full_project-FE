@@ -12,6 +12,8 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
+import { JwtModule } from '@auth0/angular-jwt';
+
 import { AuthInterceptor } from './interceptors/auth-interceptor/auth.interceptor';
 import { LoaderInterceptor } from './interceptors/loader-interceptor/loader.interceptor';
 import { ErrorInterceptor } from './interceptors/error-interceptor/error.interceptor';
@@ -22,8 +24,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { appReducers } from './store/data.state';
 import { LoadingComponent } from './components/loading/loading.component';
-
-import { JwtModule } from '@auth0/angular-jwt';
+import { AuthUserEffects } from './store/effects/auth-user.effects';
 
 export function tokenGetter() {
     return localStorage.getItem('userToken');
@@ -43,7 +44,7 @@ export function tokenGetter() {
         MatSnackBarModule,
         LoadingComponent,
         StoreModule.forRoot(appReducers),
-        EffectsModule.forRoot([UserEffects]),
+        EffectsModule.forRoot([UserEffects, AuthUserEffects]),
         StoreDevtoolsModule.instrument(),
 
         JwtModule.forRoot({

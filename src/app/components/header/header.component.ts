@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnDestroy } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 
@@ -9,12 +9,18 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
-import { filter, Subject, takeUntil, switchMap } from 'rxjs';
+import { filter, Subject, takeUntil, switchMap, Observable, tap } from 'rxjs';
 
 import { ConfirmationDialogChoice } from './../../enums/dialog-enums';
 import { UserService } from 'src/app/services/user/user.service';
 import { AuthDataService } from './../../services/user/auth-data.service';
 import { defaultMenuTabs } from './../../constants/menu';
+import { AuthData } from 'src/app/interfaces/authData.interface';
+import { RouteUrls } from './../../constants/routes';
+import { AuthDTO } from 'src/app/interfaces/authDTO.interface';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/store/data.state';
+import { getAuthUser } from 'src/app/store/selectors/user.selectors';
 
 @Component({
     selector: 'app-header',
@@ -33,15 +39,25 @@ import { defaultMenuTabs } from './../../constants/menu';
         ReactiveFormsModule
     ]
 })
-export class HeaderComponent implements OnDestroy {
+export class HeaderComponent implements OnInit, OnDestroy {
     public links = defaultMenuTabs;
     public activeLink = this.links[0];
+    public authUser$: Observable<AuthData | null>;
 
     private destroy$ = new Subject<void>();
 
-    constructor(private router: Router, private authDataService: AuthDataService, private userService: UserService) {}
+    constructor(
+        private authDataService: AuthDataService,
+        private userService: UserService,
+        private router: Router,
+        private store: Store<AppState>
+    ) {}
 
-    signOut() {
+    ngOnInit(): void {
+        this.authUser$ = this.store.select(getAuthUser());
+    }
+
+    public signOut(): void {
         const userToken = localStorage.getItem('userToken');
 
         this.userService
@@ -51,7 +67,24 @@ export class HeaderComponent implements OnDestroy {
                 switchMap(() => this.authDataService.logout(userToken)),
                 takeUntil(this.destroy$)
             )
-            .subscribe();
+            .subscribe(() => {
+                localStorage.clear();
+                this.router.navigate([RouteUrls.login]);
+            });
+    }
+
+    public deleteAcc(id: string): void {
+        this.userService
+            .showConfirmationDialog('Are you sure that you want to delete your account?')
+            .pipe(
+                filter(value => value === ConfirmationDialogChoice.confirm),
+                switchMap(() => this.authDataService.deleteAccount(id)),
+                takeUntil(this.destroy$)
+            )
+            .subscribe(() => {
+                localStorage.clear();
+                this.router.navigate([RouteUrls.login]);
+            });
     }
 
     ngOnDestroy(): void {

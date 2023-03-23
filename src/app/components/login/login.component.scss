@@ -6,7 +6,8 @@
 }
 
 .container {
-    background-color: #a272d1;
+    background-image: url('../../../assets/texture-background-min.jpg');
+    background-size: cover;
     height: 100vh;
     app-login-form {
         display: flex;
