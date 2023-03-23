@@ -10,13 +10,13 @@
         border: none;
     }
     .mat-tab-nav-bar.mat-primary .mat-ink-bar {
-        background-color: rgb(17, 119, 114);
+        background-color: rgb(155, 172, 185);
     }
 }
 
 .header {
     width: 100%;
-    background-color: rgb(150, 213, 213);
+    background-image: radial-gradient(circle at 50% 84.68%, #efeae6 0, #bdc5cb 50%, #8da1b1 100%);
     display: flex;
     justify-content: center;
 
@@ -32,10 +32,42 @@
         #logo {
             width: 50px;
             height: 50px;
+            opacity: 0.5;
         }
         #logout-icon {
             font-size: xx-large;
             cursor: pointer;
         }
+        .greetings {
+            color: rgb(72, 102, 102);
+            margin-right: 20px;
+            font-size: 17px;
+        }
+        .acc-icon {
+            cursor: pointer;
+            font-size: 30px;
+            height: 30px;
+            width: 30px;
+        }
     }
+}
+
+.settings-container,
+.logout-container,
+.delete-container {
+    cursor: pointer;
+    padding: 8px 10px;
+    display: flex;
+    align-items: flex-end;
+    span {
+        margin-left: 10px;
+        font-size: 16px;
+    }
+}
+
+.settings-container:hover,
+.logout-container:hover,
+.delete-container:hover {
+    background-color: rgb(231, 235, 238);
+    transition: 0.4s;
 }

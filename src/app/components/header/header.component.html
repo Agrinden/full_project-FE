@@ -1,6 +1,6 @@
 <header class="header">
   <div class="header-container">
-    <img src="../../../assets/main-logo.svg" alt="" id="logo">
+    <img src="../../../assets/main-logo.svg" id="logo">
     <nav class="nav-panel" mat-tab-nav-bar [tabPanel]="tabPanel">
       <a mat-tab-link routerLinkActive="active-link" *ngFor="let link of links" (click)="activeLink = link"
         [active]="activeLink === link" routerLink="{{ link.route }}">
@@ -9,6 +9,24 @@
       </a>
     </nav>
     <mat-tab-nav-panel #tabPanel></mat-tab-nav-panel>
-    <span class="material-icons" id="logout-icon" title="logOut" (click)="signOut()">logout</span>
+    <ng-container *ngIf="authUser$ | async as authUser">
+      <span class="greetings">What's up, <b>{{ authUser.name }}</b></span>
+
+      <mat-icon class="acc-icon" [matMenuTriggerFor]="menu">account_circle</mat-icon>
+      <mat-menu #menu class="dropdown-menu">
+        <div class="settings-container">
+          <mat-icon>settings</mat-icon>
+          <span>Settings</span>
+        </div>
+        <div class="logout-container" (click)="signOut()">
+          <mat-icon>logout</mat-icon>
+          <span>Log Out</span>
+        </div>
+        <div class="delete-container" (click)="deleteAcc(authUser._id)">
+          <mat-icon>delete</mat-icon>
+          <span>Delete account</span>
+        </div>
+      </mat-menu>
+    </ng-container>
   </div>
 </header>
