@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AuthGuard } from './guards/auth.guards';
 import { RouteUrls } from './constants/routes';
+import { ErrorPageComponent } from './components/error-page/error-page.component';
 
 const routes: Routes = [
     {
@@ -37,6 +38,10 @@ const routes: Routes = [
         path: RouteUrls.registration,
         loadComponent: () =>
             import('./components/registration/registration.component').then(m => m.RegistrationComponent)
+    },
+    {
+        path: 'error',
+        component: ErrorPageComponent
     },
     {
         path: '**',
