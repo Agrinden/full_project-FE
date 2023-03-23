@@ -2,15 +2,12 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 
-import { MatSnackBar } from '@angular/material/snack-bar';
-
 import { filter, Observable, Subject, takeUntil } from 'rxjs';
 import { Store } from '@ngrx/store';
 
 import { ConfirmationDialogChoice } from 'src/app/enums/dialog-enums';
 import { UsersDTO } from 'src/app/interfaces/usersDTO.interface';
 import { UserService } from 'src/app/services/user/user.service';
-import { SnackBarComponent } from '../snack-bar/snack-bar.component';
 import { getUsers } from './../../store/selectors/user.selectors';
 import { loadUsers, updateUser, addUser, deleteUser } from './../../store/actions/user.actions';
 import { AppState } from './../../store/data.state';

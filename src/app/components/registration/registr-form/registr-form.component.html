@@ -32,7 +32,8 @@
     </div>
     <mat-form-field class="example-full-width" appearance="fill">
       <mat-label>Confirm password</mat-label>
-      <input [type]="isPassVisible ? 'text' : 'password'" matInput formControlName="confirmPassword" autocomplete="on">
+      <input [type]="isConfirmPassVisible ? 'text' : 'password'" matInput formControlName="confirmPassword"
+        autocomplete="on">
       <mat-icon class="eye-icon" (click)="toggleConfirmPassVisibility()">{{ isConfirmPassVisible ? 'visibility_off' :
         'visibility'
         }}</mat-icon>
