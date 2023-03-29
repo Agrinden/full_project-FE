@@ -1,0 +1,15 @@
+:host ::ng-deep table.mat-table,
+.mat-form-field {
+    width: 100%;
+}
+
+:host ::ng-deep .mat-form-field-wrapper {
+    width: 85px;
+}
+
+.admin-panel-1 {
+    margin-top: 20px;
+    .choose-role {
+        top: 10px;
+    }
+}

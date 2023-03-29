@@ -1,0 +1,6 @@
+<div class="auth-users" *ngIf="authUsers.length; else noData">
+  <app-auth-users-list [tableData]="authUsers"></app-auth-users-list>
+</div>
+<ng-template #noData>
+  <span>No authenticated users.</span>
+</ng-template>

@@ -9,15 +9,19 @@
       </a>
     </nav>
     <mat-tab-nav-panel #tabPanel></mat-tab-nav-panel>
+
     <ng-container *ngIf="authUser$ | async as authUser">
       <span class="greetings">What's up, <b>{{ authUser.name }}</b></span>
 
       <mat-icon class="acc-icon" [matMenuTriggerFor]="menu">account_circle</mat-icon>
-      <mat-menu #menu class="dropdown-menu">
-        <div class="settings-container">
+      <mat-menu #menu="matMenu" class="dropdown-menu">
+        <div class="settings-container" mat-menu-item [matMenuTriggerFor]="settingsPanel">
           <mat-icon>settings</mat-icon>
-          <span>Settings</span>
+          <span id="settings">Settings</span>
         </div>
+        <mat-menu #settingsPanel>
+          <p routerLink="/adminPanel" id="admin-panel">Admin panel</p>
+        </mat-menu>
         <div class="logout-container" (click)="signOut()">
           <mat-icon>logout</mat-icon>
           <span>Log Out</span>

@@ -27,18 +27,20 @@ export class AuthDataService {
         return this.http.post<string>(environment.LOGOUT_URL, body);
     }
 
-    public registration(regData: RegistrDataDTO): Observable<Response> {
-        return this.http.post<Response>(environment.REGISTRATION_URL, regData);
+    public registration(regData: RegistrDataDTO): Observable<RegistrDataDTO> {
+        return this.http.post<RegistrDataDTO>(environment.REGISTRATION_URL, regData);
     }
 
     public deleteAccount(userId: string): Observable<{ _id: string }> {
-        console.log(userId);
-
         return this.http.delete<{ _id: string }>(`${environment.baseUrl}/${userId}`);
     }
 
     public isAuthenticated(): boolean {
         return !!(this.token && !this.jwtHelper.isTokenExpired(this.token));
+    }
+
+    public getAllAuthUsers(): Observable<RegistrDataDTO[]> {
+        return this.http.get<RegistrDataDTO[]>(environment.baseUrl.concat('/authUsers'));
     }
 
     public getUserFromJwt() {

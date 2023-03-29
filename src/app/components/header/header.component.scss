@@ -52,7 +52,25 @@
     }
 }
 
-.settings-container,
+#admin-panel {
+    font-size: 16px;
+    padding: 10px;
+    cursor: pointer;
+    margin: 0;
+}
+
+.settings-container {
+    cursor: pointer;
+    padding: 0px 10px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    span {
+        margin-left: 10px;
+        font-size: 16px;
+    }
+}
+
 .logout-container,
 .delete-container {
     cursor: pointer;
@@ -65,9 +83,18 @@
     }
 }
 
+#settings {
+    left: 33px;
+    position: absolute;
+}
+
 .settings-container:hover,
 .logout-container:hover,
-.delete-container:hover {
+.delete-container:hover,
+#admin-panel:hover {
     background-color: rgb(231, 235, 238);
     transition: 0.4s;
+}
+::ng-deep #mat-menu-panel-1 {
+    min-height: 50px;
 }

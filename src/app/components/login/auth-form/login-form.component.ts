@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 
-import { filter, take } from 'rxjs';
+import { filter, take, tap } from 'rxjs';
 
 import { Store } from '@ngrx/store';
 
@@ -65,7 +65,9 @@ export class LoginFormComponent implements OnInit {
                 filter(data => !!data),
                 take(1)
             )
-            .subscribe(() => this.router.navigate([RouteUrls.main]));
+            .subscribe(res => {
+                this.router.navigate([RouteUrls.main]);
+            });
     }
 
     public registration(): void {

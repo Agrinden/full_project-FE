@@ -1,3 +1,5 @@
+import { RouterModule } from '@angular/router';
+import { AdminPageComponent } from './../admin-page/admin-page.component';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
@@ -19,7 +21,7 @@ import { UserCardComponent } from './../user-card/user-card.component';
     styleUrls: ['./main-page.component.scss'],
 
     standalone: true,
-    imports: [CommonModule, FormsModule, UserCardComponent]
+    imports: [CommonModule, FormsModule, RouterModule, UserCardComponent, AdminPageComponent]
 })
 export class MainPageComponent implements OnInit, OnDestroy {
     public users$: Observable<UsersDTO[]>;

@@ -1,3 +1,4 @@
+import { AdminPageComponent } from './../admin-page/admin-page.component';
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
@@ -36,7 +37,8 @@ import { getAuthUser } from 'src/app/store/selectors/user.selectors';
         MatMenuModule,
         MatDialogModule,
         MatSlideToggleModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        AdminPageComponent
     ]
 })
 export class HeaderComponent implements OnInit, OnDestroy {
