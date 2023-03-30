@@ -10,6 +10,7 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { Subject, filter, switchMap } from 'rxjs';
 
@@ -17,6 +18,8 @@ import { RegistrDataDTO } from './../../interfaces/registrData.interface';
 import { UserService } from 'src/app/services/user/user.service';
 import { ConfirmationDialogChoice } from './../../enums/dialog-enums';
 import { AuthDataService } from './../../services/user/auth-data.service';
+import { AuthUserRoleService } from './../../services/user/auth-user-role.service';
+import { SnackBarComponent } from './../snack-bar/snack-bar.component';
 
 @Component({
     selector: 'app-auth-users-list',
@@ -44,11 +47,17 @@ export class AuthUsersListComponent implements OnInit, AfterViewInit, OnDestroy 
 
     public displayedColumns: string[];
     public dataSource: MatTableDataSource<RegistrDataDTO>;
-    public chooseValue = '';
+    public choosenRole = '';
+    public id = '';
 
     private destroy$: Subject<void> = new Subject<void>();
 
-    constructor(private authDataService: AuthDataService, private userService: UserService) {}
+    constructor(
+        private authDataService: AuthDataService,
+        private userService: UserService,
+        private authUserRoleService: AuthUserRoleService,
+        private snackBar: MatSnackBar
+    ) {}
 
     ngOnInit(): void {
         this.initializeTable(this.tableData);
@@ -68,20 +77,42 @@ export class AuthUsersListComponent implements OnInit, AfterViewInit, OnDestroy 
         }
     }
 
+    public onSelected(value: string, id: string): void {
+        this.choosenRole = value;
+        this.id = id;
+    }
+
+    public saveRole(): void {
+        this.authUserRoleService.changeAuthUserRole(this.choosenRole, this.id).subscribe(() => {
+            this.snackBar.openFromComponent(SnackBarComponent, {
+                duration: 5000,
+                horizontalPosition: 'center',
+                verticalPosition: 'top',
+                data: {
+                    titleMessage: 'Users Role successfully saved',
+                    condition: true
+                }
+            });
+            this.initializeTable(this.tableData);
+        });
+    }
+
     public deleteUser(id: string): void {
-        console.log(id);
         this.userService
             .showConfirmationDialog('Are you sure that you want to delete that account?')
             .pipe(
                 filter(value => value === ConfirmationDialogChoice.confirm),
                 switchMap(() => this.authDataService.deleteAccount(id))
             )
-            .subscribe();
+            .subscribe(() => {
+                const newTableData = this.tableData.filter(data => data._id !== id);
+                this.initializeTable(newTableData);
+            });
     }
 
     private initializeTable(tableData: RegistrDataDTO[]): void {
         this.dataSource = new MatTableDataSource(tableData);
-        this.displayedColumns = ['name', 'email', 'role', 'delete accaunt'];
+        this.displayedColumns = ['name', 'email', 'role', 'save', 'delete accaunt'];
     }
 
     ngOnDestroy(): void {

@@ -24,14 +24,19 @@
         <td mat-cell *matCellDef="let element">
           <mat-form-field appearance="fill" class="choose-role">
             <mat-label>{{ element.role }}</mat-label>
-            <mat-select disableRipple>
-              <mat-option [value]="chooseValue">User</mat-option>
-              <mat-option [value]="chooseValue">Admin</mat-option>
+            <mat-select #role (valueChange)="onSelected(role.value, element._id)" disableRipple>
+              <mat-option value="User">User</mat-option>
+              <mat-option value="Admin">Admin</mat-option>
             </mat-select>
           </mat-form-field>
         </td>
-        <td>
+      </ng-container>
 
+      <ng-container matColumnDef="save">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-button (click)="saveRole()"><mat-icon title="save">save</mat-icon></button>
+        </td>
       </ng-container>
 
       <ng-container matColumnDef="delete accaunt">

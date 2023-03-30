@@ -14,7 +14,7 @@
       <span class="greetings">What's up, <b>{{ authUser.name }}</b></span>
 
       <mat-icon class="acc-icon" [matMenuTriggerFor]="menu">account_circle</mat-icon>
-      <mat-menu #menu="matMenu" class="dropdown-menu">
+      <mat-menu #menu="matMenu">
         <div class="settings-container" mat-menu-item [matMenuTriggerFor]="settingsPanel">
           <mat-icon>settings</mat-icon>
           <span id="settings">Settings</span>

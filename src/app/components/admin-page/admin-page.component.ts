@@ -19,6 +19,8 @@ export class AdminPageComponent implements OnInit {
     constructor(private authDataService: AuthDataService) {}
 
     ngOnInit(): void {
-        this.authDataService.getAllAuthUsers().subscribe(usersData => (this.authUsers = usersData || []));
+        this.authDataService.getAllAuthUsers().subscribe(usersData => {
+            this.authUsers = usersData.filter(data => data.role !== 'Owner') || [];
+        });
     }
 }

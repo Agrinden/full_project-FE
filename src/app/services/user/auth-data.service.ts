@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
+
 import jwtDecode from 'jwt-decode';
 
 import { environment } from './../../../environments/environment';
@@ -15,7 +15,7 @@ import { RegistrDataDTO } from './../../interfaces/registrData.interface';
 export class AuthDataService {
     public token = localStorage.getItem('userToken');
 
-    constructor(private http: HttpClient, private router: Router, private jwtHelper: JwtHelperService) {}
+    constructor(private http: HttpClient, private jwtHelper: JwtHelperService) {}
 
     public login(authData: AuthData): Observable<AuthDTO> {
         const body = { ...authData };
