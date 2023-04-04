@@ -25,9 +25,22 @@ import { AppComponent } from './app.component';
 import { appReducers } from './store/data.state';
 import { LoadingComponent } from './components/loading/loading.component';
 import { AuthUserEffects } from './store/effects/auth-user.effects';
+import { AuthUserActionTypes } from './store/actions/auth-user.actions';
 
 export function tokenGetter() {
     return localStorage.getItem('userToken');
+}
+
+export function clearState(reducer: any) {
+    return function(state: any, action: any) {
+        if (
+            action.type === AuthUserActionTypes.LOGOUT_AUTH_USER_SUCCESS ||
+            action.type === AuthUserActionTypes.DELETE_AUTH_USER_SUCCESS
+        ) {
+            state = undefined;
+        }
+        return reducer(state, action);
+    };
 }
 
 @NgModule({
@@ -43,7 +56,7 @@ export function tokenGetter() {
         UserCardComponent,
         MatSnackBarModule,
         LoadingComponent,
-        StoreModule.forRoot(appReducers),
+        StoreModule.forRoot(appReducers, { metaReducers: [clearState] }),
         EffectsModule.forRoot([UserEffects, AuthUserEffects]),
         StoreDevtoolsModule.instrument(),
 

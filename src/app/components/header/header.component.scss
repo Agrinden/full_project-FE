@@ -26,6 +26,9 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        .active-link {
+            border-bottom: 2px solid black;
+        }
         .nav-panel {
             margin: 0 80px;
         }
@@ -48,13 +51,21 @@
             font-size: 30px;
             height: 30px;
             width: 30px;
+            margin-left: 10px;
         }
     }
 }
 
-.settings-container,
+#admin-panel {
+    font-size: 16px;
+    padding: 10px;
+    cursor: pointer;
+    margin: 0;
+}
+
 .logout-container,
-.delete-container {
+.delete-container,
+.settings-container {
     cursor: pointer;
     padding: 8px 10px;
     display: flex;
@@ -67,7 +78,11 @@
 
 .settings-container:hover,
 .logout-container:hover,
-.delete-container:hover {
+.delete-container:hover,
+#admin-panel:hover {
     background-color: rgb(231, 235, 238);
     transition: 0.4s;
+}
+::ng-deep #mat-menu-panel-1 {
+    min-height: 50px;
 }

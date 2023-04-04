@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { AuthDataService } from './services/user/auth-data.service';
-import { loadAuthUsersSuccess } from './store/actions/user.actions';
+import { loadAuthUsersSuccess } from './store/actions/auth-user.actions';
 import { AppState } from './store/data.state';
 
 @Component({

@@ -13,12 +13,11 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 
-import { AuthDataService } from '../../../services/user/auth-data.service';
 import { AuthData } from 'src/app/interfaces/authData.interface';
 import { RouteUrls } from 'src/app/constants/routes';
 import { AppState } from './../../../store/data.state';
-import { getAuthUser } from './../../../store/selectors/user.selectors';
-import { loadAuthUser } from 'src/app/store/actions/user.actions';
+import { getAuthUser } from './../../../store/selectors/auth-user.selector';
+import { loadAuthUser } from 'src/app/store/actions/auth-user.actions';
 
 @Component({
     selector: 'app-login-form',
@@ -65,7 +64,9 @@ export class LoginFormComponent implements OnInit {
                 filter(data => !!data),
                 take(1)
             )
-            .subscribe(() => this.router.navigate([RouteUrls.main]));
+            .subscribe(res => {
+                this.router.navigate([RouteUrls.main]);
+            });
     }
 
     public registration(): void {
