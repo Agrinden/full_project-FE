@@ -14,6 +14,6 @@ export class AuthUserRoleService {
 
     public changeAuthUserRole(userRole: string, id: string): Observable<RegistrDataDTO> {
         const body = { role: userRole, _id: id };
-        return this.http.put<RegistrDataDTO>(environment.CHANGE_USER_ROLE_URL, body);
+        return this.http.put<RegistrDataDTO>(environment.baseUrl.concat('/authUser'), body);
     }
 }

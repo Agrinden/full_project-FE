@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 
-import { filter, take, tap } from 'rxjs';
+import { filter, take } from 'rxjs';
 
 import { Store } from '@ngrx/store';
 
@@ -13,12 +13,11 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 
-import { AuthDataService } from '../../../services/user/auth-data.service';
 import { AuthData } from 'src/app/interfaces/authData.interface';
 import { RouteUrls } from 'src/app/constants/routes';
 import { AppState } from './../../../store/data.state';
-import { getAuthUser } from './../../../store/selectors/user.selectors';
-import { loadAuthUser } from 'src/app/store/actions/user.actions';
+import { getAuthUser } from './../../../store/selectors/auth-user.selector';
+import { loadAuthUser } from 'src/app/store/actions/auth-user.actions';
 
 @Component({
     selector: 'app-login-form',

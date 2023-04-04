@@ -1,14 +1,6 @@
 import { Action, createReducer, on } from '@ngrx/store';
 
-import { AuthData } from './../../interfaces/authData.interface';
-
-import {
-    addUserSuccess,
-    updateUserSuccess,
-    deleteUserSuccess,
-    loadUsersSuccess,
-    loadAuthUsersSuccess
-} from './../actions/user.actions';
+import { addUserSuccess, updateUserSuccess, deleteUserSuccess, loadUsersSuccess } from './../actions/user.actions';
 import { UsersDTO } from '../../interfaces/usersDTO.interface';
 
 export interface UsersState {
@@ -17,14 +9,6 @@ export interface UsersState {
 
 export const initialUsersState: UsersState = {
     users: []
-};
-
-export interface AuthUserState {
-    authUser: AuthData | null;
-}
-
-export const initialAuthUserState: AuthUserState = {
-    authUser: null
 };
 
 const _usersReducer = createReducer(
@@ -62,20 +46,6 @@ const _usersReducer = createReducer(
     })
 );
 
-const _authUserReducer = createReducer(
-    initialAuthUserState,
-    on(loadAuthUsersSuccess, (state, action) => {
-        return {
-            ...state,
-            authUser: action.authUser
-        };
-    })
-);
-
 export function usersReducer(state = initialUsersState, action: Action): UsersState {
     return _usersReducer(state, action);
-}
-
-export function authUserReducer(state = initialAuthUserState, action: Action): AuthUserState {
-    return _authUserReducer(state, action);
 }

@@ -26,6 +26,9 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        .active-link {
+            border-bottom: 2px solid black;
+        }
         .nav-panel {
             margin: 0 80px;
         }
@@ -48,6 +51,7 @@
             font-size: 30px;
             height: 30px;
             width: 30px;
+            margin-left: 10px;
         }
     }
 }
@@ -59,20 +63,9 @@
     margin: 0;
 }
 
-.settings-container {
-    cursor: pointer;
-    padding: 0px 10px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    span {
-        margin-left: 10px;
-        font-size: 16px;
-    }
-}
-
 .logout-container,
-.delete-container {
+.delete-container,
+.settings-container {
     cursor: pointer;
     padding: 8px 10px;
     display: flex;
@@ -81,11 +74,6 @@
         margin-left: 10px;
         font-size: 16px;
     }
-}
-
-#settings {
-    left: 33px;
-    position: absolute;
 }
 
 .settings-container:hover,

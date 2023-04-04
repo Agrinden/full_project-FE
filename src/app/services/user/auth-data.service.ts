@@ -43,6 +43,11 @@ export class AuthDataService {
         return this.http.get<RegistrDataDTO[]>(environment.baseUrl.concat('/authUsers'));
     }
 
+    public getAuthUser(id: string): Observable<RegistrDataDTO> {
+        const body = { _id: id };
+        return this.http.post<RegistrDataDTO>(environment.baseUrl.concat('/authUser'), body);
+    }
+
     public getUserFromJwt() {
         if (this.token) {
             const user: AuthData = jwtDecode(this.token);

@@ -83,6 +83,9 @@ export class AuthUsersListComponent implements OnInit, AfterViewInit, OnDestroy 
     }
 
     public saveRole(): void {
+        if (this.choosenRole === '' && this.id === '') {
+            throw console.log('Role was not choosen');
+        }
         this.authUserRoleService.changeAuthUserRole(this.choosenRole, this.id).subscribe(() => {
             this.snackBar.openFromComponent(SnackBarComponent, {
                 duration: 5000,
@@ -93,7 +96,10 @@ export class AuthUsersListComponent implements OnInit, AfterViewInit, OnDestroy 
                     condition: true
                 }
             });
+            this.choosenRole = '';
+            this.id = '';
             this.initializeTable(this.tableData);
+            this.dataSource.paginator = this.paginator;
         });
     }
 
@@ -107,6 +113,7 @@ export class AuthUsersListComponent implements OnInit, AfterViewInit, OnDestroy 
             .subscribe(() => {
                 const newTableData = this.tableData.filter(data => data._id !== id);
                 this.initializeTable(newTableData);
+                this.dataSource.paginator = this.paginator;
             });
     }
 

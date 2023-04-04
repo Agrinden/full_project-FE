@@ -23,11 +23,10 @@
       </span>
     </div>
     <mat-dialog-actions class="down-button">
-      <button class="login-btn" cdkFocusInitial mat-button [disabled]="loginForm.invalid"
-        (click)="login()">Login</button>
+      <button cdkFocusInitial mat-button [disabled]="loginForm.invalid" (click)="login()">Login</button>
     </mat-dialog-actions>
     <mat-dialog-actions class="down-button">
-      <button class="login-btn" cdkFocusInitial mat-button (click)="registration()">Registration</button>
+      <button class="reg-btn" cdkFocusInitial mat-button (click)="registration()">Registration</button>
     </mat-dialog-actions>
   </div>
 </form>

@@ -3,8 +3,9 @@
     width: 100%;
 }
 
-:host ::ng-deep .mat-form-field-wrapper {
-    width: 85px;
+:host ::ng-deep .cdk-column-role {
+    max-width: 20px;
+    padding-right: 44px;
 }
 
 :host ::ng-deep .ng-tns-c127-2 {
