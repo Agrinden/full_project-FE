@@ -3,5 +3,6 @@ export enum RouteUrls {
     main = 'main',
     registration = 'registration',
     contacts = 'contacts',
-    about = 'about'
+    about = 'about',
+    adminPanel = 'adminPanel'
 }
