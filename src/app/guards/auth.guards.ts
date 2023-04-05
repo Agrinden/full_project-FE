@@ -4,21 +4,19 @@ import { Injectable } from '@angular/core';
 import { RouteUrls } from './../constants/routes';
 import { Store } from '@ngrx/store';
 import { AppState } from '../store/data.state';
-import { getAuthUser } from '../store/selectors/auth-user.selector';
+import { AuthDataService } from '../services/user/auth-data.service';
 
 @Injectable({ providedIn: 'root' })
 export class AuthGuard implements CanActivate {
-    constructor(private router: Router, private store: Store<AppState>) {}
+    constructor(private router: Router, private store: Store<AppState>, private authData: AuthDataService) {}
 
     canActivate(): boolean {
-        if (this.checkIfUserAuthenticated()) {
+        const userId = this.authData.getUserFromJwt();
+
+        if (userId?._id && userId._id !== undefined) {
             return true;
         }
         this.router.navigate([RouteUrls.login]);
         return false;
-    }
-
-    private checkIfUserAuthenticated() {
-        return this.store.select(getAuthUser());
     }
 }
